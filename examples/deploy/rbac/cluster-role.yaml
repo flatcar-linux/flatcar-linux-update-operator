@@ -47,3 +47,9 @@ rules:
       - daemonsets
     verbs:
       - get
+  - apiGroups:
+      - storage.k8s.io
+    resources:
+      - volumeattachments
+    verbs:
+      - list

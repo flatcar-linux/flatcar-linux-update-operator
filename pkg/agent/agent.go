@@ -293,6 +293,30 @@ func (k *klocksmith) process(ctx context.Context) error {
 
 	klog.Info("Node drained, rebooting")
 
+	for {
+		attachments, err := k.clientset.StorageV1().VolumeAttachments().List(ctx, metav1.ListOptions{})
+		if err != nil {
+			klog.Errorf("Listing volume attachments: %v", err)
+			continue
+		}
+
+		anyVolumeAttached := false
+
+		for _, attachment := range attachments.Items {
+			if attachment.Status.Attached && attachment.Spec.NodeName == k.nodeName {
+				anyVolumeAttached = true
+				klog.Infof("Volume %q is still attached, waiting for detach", attachment.Name)
+			}
+		}
+
+		if !anyVolumeAttached {
+			klog.Info("All volumes are detached from node, rebooting.")
+			break
+		}
+
+		time.Sleep(5 * time.Second)
+	}
+
 	// Reboot.
 	k.lc.Reboot(false)
 
