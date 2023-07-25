@@ -16,7 +16,7 @@ spec:
       serviceAccountName: flatcar-linux-update-operator-sa
       containers:
       - name: update-operator
-        image: ghcr.io/flatcar/flatcar-linux-update-operator:v0.9.0
+        image: ghcr.io/flatcar/flatcar-linux-update-operator:v0.10.0-rc1
         command:
         - "/bin/update-operator"
         env:

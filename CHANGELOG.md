@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.0] - 2023-07-24
+### Added
+- Agent now supports `-force-drain` flag, which allows removal of pods with custom or no controller when draining nodes [#197](https://github.com/flatcar/flatcar-linux-update-operator/pull/197).
+
+### Changed
+- Everything is now built using Go 1.20.
+- Container images now use Alpine Linux version v3.18 as a base image.
+
 ## [0.9.0] - 2023-01-03
 ### Added
 - Example manifests use new `node-role.kubernetes.io/control-plane` tolerations in addition to legacy `node-role.kubernetes.io/master`.
@@ -89,6 +97,7 @@ is able to trigger a reboot on the host.
 - Made operator code compatible with Kubernetes 1.17.
 - Fixed publishing leader acquired event by the operator.
 
+[0.10.0]: https://github.com/flatcar/flatcar-linux-update-operator/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/flatcar/flatcar-linux-update-operator/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/flatcar/flatcar-linux-update-operator/compare/v0.7.3...v0.8.0
 [0.7.3]: https://github.com/flatcar/flatcar-linux-update-operator/compare/v0.7.2...v0.7.3
